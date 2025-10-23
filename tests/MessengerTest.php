@@ -2,17 +2,21 @@
 
 use Linx\Messenger\Messenger;
 use Linx\Messenger\Contracts\MessengerClient;
+use PHPUnit\Framework\TestCase;
 
-class MessengerTest extends PHPUnit_Framework_TestCase
+class MessengerTest extends TestCase
 {
-    public function setUp()
+    private $clientMock;
+    private $messenger;
+
+    protected function setUp(): void
     {
         $this->clientMock = Mockery::mock(MessengerClient::class);
 
         $this->messenger = new Messenger($this->clientMock);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Mockery::close();
     }

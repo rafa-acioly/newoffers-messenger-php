@@ -5,17 +5,21 @@ use Aws\Sns\SnsClient as AwsSns;
 use Aws\Sns\Exception\SnsException;
 use GuzzleHttp\Promise\RejectedPromise;
 use GuzzleHttp\Promise\FulfilledPromise;
+use PHPUnit\Framework\TestCase;
 
-class SnsClientTest extends PHPUnit_Framework_TestCase
+class SnsClientTest extends TestCase
 {
-    public function setUp()
+    private $awsSnsMock;
+    private $snsClient;
+
+    protected function setUp(): void
     {
         $this->awsSnsMock = Mockery::mock(AwsSns::class);
 
         $this->snsClient = new Sns($this->awsSnsMock);
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Mockery::close();
     }
